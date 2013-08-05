@@ -13,5 +13,7 @@
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
+@property (nonatomic, assign) SCTextField *usernameField;
+@property (nonatomic, assign) SCTextField *passwordField;
 
 @end
