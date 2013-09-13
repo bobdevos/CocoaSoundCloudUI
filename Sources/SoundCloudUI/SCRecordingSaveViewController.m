@@ -1,12 +1,12 @@
 /*
  * Copyright 2010, 2011 nxtbgthng for SoundCloud Ltd.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -15,7 +15,7 @@
  *
  * For more information and documentation refer to
  * http://soundcloud.com/api
- *
+ * 
  */
 
 #if TARGET_OS_IPHONE
@@ -265,7 +265,7 @@ const NSArray *allServices = nil;
                                                  selector:@selector(keyboardWillChangeVisibility:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
-        
+    
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardDidChangeVisibility:)
                                                      name:UIKeyboardDidHideNotification
@@ -318,12 +318,12 @@ const NSArray *allServices = nil;
 }
 
 - (void)setAccount:(SCAccount *)anAccount;
-{
+{   
     if (account != anAccount) {
         [account release];
         [anAccount retain];
         account = anAccount;
-        
+ 
         if (self.account) {
             
             loadingConnections = YES;
@@ -475,9 +475,9 @@ const NSArray *allServices = nil;
 - (void)viewDidLoad;
 {
     [super viewDidLoad];
-    
+        
     self.view.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin);
-    
+
     
     // Background
     UIImage *bg = [SCBundle imageWithName:@"darkTexturedBackgroundPattern"];
@@ -507,7 +507,7 @@ const NSArray *allServices = nil;
     [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
     
     [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithTitle:SCLocalizedString(@"upload_and_share", @"Upload & Share")
-                                                              style:UIBarButtonItemStyleBordered
+                                                            style:UIBarButtonItemStyleBordered
                                                              target:self
                                                              action:@selector(upload)] autorelease]];
     
@@ -561,7 +561,7 @@ const NSArray *allServices = nil;
                            forControlEvents:UIControlEventTouchUpInside];
     
     self.tableView.tableHeaderView = self.headerView;
-    
+
     
     [self updateInterface];
 }
@@ -573,7 +573,7 @@ const NSArray *allServices = nil;
     [self.view addSubview:[[[SCShareToSoundCloudTitleView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), 28.0)] autorelease]];
     
     [self.toolBar setFrame:CGRectMake(0.0,
-                                      CGRectGetHeight(self.view.bounds) - 44.0,
+                                      CGRectGetHeight(self.view.bounds) - 44.0, 
                                       CGRectGetWidth(self.view.bounds),
                                       44.0)];
     
@@ -646,7 +646,7 @@ const NSArray *allServices = nil;
 #pragma mark TableView
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
-{
+{    
     if (isPrivate){
         return 1;
     } else if (self.loadingConnections) {
@@ -676,14 +676,14 @@ const NSArray *allServices = nil;
             cell.detailTextLabel.textColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
-        
+                
         cell.textLabel.text = SCLocalizedString(@"sc_upload_with_access", @"With access");
         if (self.sharingMailAddresses.count == 0) {
             cell.detailTextLabel.text = SCLocalizedString(@"sc_upload_only_you", @"Only you");
         } else {
             cell.detailTextLabel.text = [self.sharingMailAddresses componentsJoinedByString:@", "];
         }
-        
+
         [(SCTableCellBackgroundView *)cell.backgroundView setPosition:[aTableView cellPositionForIndexPath:indexPath]];
         
         return cell;
@@ -703,7 +703,7 @@ const NSArray *allServices = nil;
             [activityIndicatorView startAnimating];
             [backgroundView addSubview:activityIndicatorView];
             [activityIndicatorView release];
-            
+
             cell.backgroundView = backgroundView;
             cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -715,7 +715,7 @@ const NSArray *allServices = nil;
         
         if (indexPath.row < self.availableConnections.count) {
             UITableViewCell *cell = nil;  // WORKAROUND: Reusing cells causes a problem with the boarder
-            //[aTableView dequeueReusableCellWithIdentifier:@"connection"];
+                                          //[aTableView dequeueReusableCellWithIdentifier:@"connection"];
             if (!cell) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"connection"] autorelease];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -759,7 +759,7 @@ const NSArray *allServices = nil;
             return cell;
         } else {
             UITableViewCell *cell = nil; // WORKAROUND: Reusing cells causes a problem with the boarder
-            // [aTableView dequeueReusableCellWithIdentifier:@"newConnection"];
+                                         // [aTableView dequeueReusableCellWithIdentifier:@"newConnection"];
             if (!cell) {
                 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"newConnection"] autorelease];
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -932,7 +932,7 @@ const NSArray *allServices = nil;
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-{
+{    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (textField == self.headerView.whatTextField) {
@@ -984,7 +984,7 @@ const NSArray *allServices = nil;
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;
 {
     if (buttonIndex == actionSheet.firstOtherButtonIndex) {
-        [self openImageLibraryPicker];
+        [self openImageLibraryPicker];  
     } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1
                && [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera].count > 0) {
         [self openCameraPicker];
@@ -999,7 +999,7 @@ const NSArray *allServices = nil;
 #pragma mark Image Picker Delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
-{
+{     
     self.coverImage = [self cropImage:info];
     
     if (self.imagePickerPopoverController) {
@@ -1133,9 +1133,9 @@ const NSArray *allServices = nil;
         self.imagePickerPopoverController.delegate = self;
         
         [self.imagePickerPopoverController presentPopoverFromRect:self.headerView.coverImageButton.bounds
-                                                           inView:self.headerView.coverImageButton
-                                         permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                         animated:YES];
+                                                inView:self.headerView.coverImageButton
+                              permittedArrowDirections:UIPopoverArrowDirectionAny
+                                              animated:YES];
         
         if (self.coverImage) {
             UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:SCLocalizedString(@"artwork_reset", @"Reset")
@@ -1169,14 +1169,14 @@ const NSArray *allServices = nil;
 }
 
 /*
- Please note that UIImagePickerController will throw a
- UIApplicationInvalidInterfaceOrientation exception if your app does not
- include portrait in UISupportedInterfaceOrientations (Info.plist).
- 
- For landscape only apps, we suggest enabling portrait orientation(s) in your
- Info.plist and rejecting these in UIViewController's auto-rotation methods.
- This way, you can be landscape only for your view controllers and still be
- able to use UIImagePickerController. :)
+    Please note that UIImagePickerController will throw a
+    UIApplicationInvalidInterfaceOrientation exception if your app does not
+    include portrait in UISupportedInterfaceOrientations (Info.plist).
+
+    For landscape only apps, we suggest enabling portrait orientation(s) in your
+    Info.plist and rejecting these in UIViewController's auto-rotation methods.
+    This way, you can be landscape only for your view controllers and still be
+    able to use UIImagePickerController. :)
  */
 
 - (IBAction)openCameraPicker;
@@ -1230,7 +1230,7 @@ const NSArray *allServices = nil;
 }
 
 - (IBAction)upload;
-{
+{   
     NSMutableArray *toolbarItems = [self.toolBar.items mutableCopy];
     [toolbarItems removeLastObject];
     self.toolBar.items = toolbarItems;
@@ -1239,7 +1239,7 @@ const NSArray *allServices = nil;
     // setup progress view
     self.tableView.hidden = YES;
     [self.navigationController setToolbarHidden:YES animated:YES];
-    
+
     if (self.uploadProgressView) {
         [self.uploadProgressView removeFromSuperview];
     }
@@ -1273,10 +1273,10 @@ const NSArray *allServices = nil;
     [parameters setObject:(self.isPrivate) ? @"private" : @"public" forKey: @"track[sharing]"];
     [parameters setObject:(self.isDownloadable) ? @"1" : @"0" forKey: @"track[downloadable]"];
     if ([self.customSharingNote length] > 0) {
-        [parameters setObject:self.customSharingNote forKey:@"track[sharing_note]"];
+        [parameters setObject:self.customSharingNote forKey:@"track[sharing_note]"];	
     }
     [parameters setObject:@"recording" forKey:@"track[track_type]"];
-    
+
     // sharing
     if (self.isPrivate) {
         if (self.sharingMailAddresses.count > 0) {
@@ -1351,14 +1351,14 @@ const NSArray *allServices = nil;
                                                  
                                                  self.uploadProgressView.state = SCRecordingUploadProgressViewStateFailed;
                                                  [self.uploadProgressView setNeedsLayout];
-                                                 
-                                                 [SCAlertView showAlertViewWithTitle:SCLocalizedString(@"upload_error", nil)
-                                                                             message:error.localizedDescription
-                                                                   cancelButtonTitle:@"OK"
-                                                                   otherButtonTitles:nil
-                                                                               block:^(NSInteger buttonIndex, BOOL didCancel) {
-                                                                               }];
-                                                 
+
+                                               [SCAlertView showAlertViewWithTitle:SCLocalizedString(@"upload_error", nil)
+                                                                         message:error.localizedDescription
+                                                               cancelButtonTitle:@"OK"
+                                                               otherButtonTitles:nil
+                                                                           block:^(NSInteger buttonIndex, BOOL didCancel) {
+                                                            }];
+
                                                  
                                                  // update tool bar
                                                  NSMutableArray *toolbarItems = [self.toolBar.items mutableCopy];
@@ -1368,7 +1368,7 @@ const NSArray *allServices = nil;
                                                                                                           action:@selector(upload)] autorelease]];
                                                  self.toolBar.items = toolbarItems;
                                                  [toolbarItems release];
-                                                 
+
                                              } else {
                                                  
                                                  // Call the completion handler
@@ -1380,13 +1380,13 @@ const NSArray *allServices = nil;
                                                  [self.uploadProgressView setTrackInfo:result];
                                                  self.uploadProgressView.state = SCRecordingUploadProgressViewStateSuccess;
                                                  [self.uploadProgressView setNeedsLayout];
-                                                 
+
                                                  // update tool bar
                                                  NSMutableArray *toolbarItems = [NSMutableArray arrayWithCapacity:2];
                                                  [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
                                                  [toolbarItems addObject:[[[UIBarButtonItem alloc] initWithTitle:SCLocalizedString(@"done", @"Done") style:UIBarButtonItemStyleBordered target:self action:@selector(close)] autorelease]];
                                                  [self.toolBar setItems:toolbarItems animated:YES];
-                                             }
+                                            }
                                          }];
 }
 
@@ -1628,12 +1628,12 @@ const NSArray *allServices = nil;
 
 - (UIImage *)cropImage:(NSDictionary*)editInfo;
 {
-    CGRect editCropRect = [[editInfo valueForKey:UIImagePickerControllerCropRect] CGRectValue];
+    CGRect editCropRect = [[editInfo valueForKey:UIImagePickerControllerCropRect] CGRectValue]; 
     
     // Determine original image orientation and size
     UIImage *originalImage = [editInfo valueForKey:UIImagePickerControllerOriginalImage];
     UIImageOrientation originalOrientation = originalImage.imageOrientation;
-    
+
     CGImageRef ref = originalImage.CGImage;
     CGSize refImageSize = CGSizeMake(CGImageGetWidth(ref), CGImageGetHeight(ref));
     

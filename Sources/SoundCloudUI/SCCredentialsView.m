@@ -39,10 +39,10 @@ NSUInteger const kSCPasswordTextFieldTag = 1002;
         self.layer.borderWidth = 1.0;
         self.layer.shadowColor = [UIColor blackColor].CGColor;
         self.layer.shadowOffset = CGSizeMake(1.0, 5.0);
-        
+
         [self layoutUsernameField];
         [self layoutPasswordField];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(updateInterface)
                                                      name:UIDeviceOrientationDidChangeNotification
@@ -116,12 +116,12 @@ NSUInteger const kSCPasswordTextFieldTag = 1002;
                                           self.bounds.origin.y,
                                           CGRectGetWidth(self.bounds),
                                           CGRectGetHeight(self.bounds)/2);
-    
+
     self.passwordField.frame = CGRectMake(self.usernameField.frame.origin.x,
                                           self.usernameField.frame.origin.y + self.usernameField.frame.size.height,
                                           self.usernameField.frame.size.width,
                                           self.usernameField.frame.size.height);
-    
+
 }
 
 #pragma mark UITextField Delegate
@@ -132,7 +132,7 @@ NSUInteger const kSCPasswordTextFieldTag = 1002;
         case kSCUsernameTextFieldTag:
             self.username = textField.text;
             break;
-            
+
         case kSCPasswordTextFieldTag:
             self.password = textField.text;
             break;
@@ -156,12 +156,12 @@ NSUInteger const kSCPasswordTextFieldTag = 1002;
         case kSCUsernameTextFieldTag:
             self.username = textField.text;
             break;
-            
+
         case kSCPasswordTextFieldTag:
             self.password = textField.text;
             break;
     }
-    
+
     return YES;
 }
 
@@ -172,7 +172,7 @@ NSUInteger const kSCPasswordTextFieldTag = 1002;
             self.username = textField.text;
             [self.passwordField becomeFirstResponder];
             break;
-            
+
         case kSCPasswordTextFieldTag:
             self.password = textField.text;
             [self.passwordField resignFirstResponder];
@@ -181,7 +181,7 @@ NSUInteger const kSCPasswordTextFieldTag = 1002;
             }
             break;
     }
-    
+
     return YES;
 }
 
